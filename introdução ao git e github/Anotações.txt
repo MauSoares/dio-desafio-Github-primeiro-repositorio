@@ -1,0 +1,69 @@
+COMANDOS BASICOS GIT
+
+git config:
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+
+git init:
+Você pode obter um projeto Git utilizando duas formas principais. A primeira faz uso de um projeto ou diretório existente e o importa para o Git. A segunda clona um repositório Git existente a partir de outro servidor.
+Inicializando um Repositório em um Diretório Existente
+Caso você esteja iniciando o monitoramento de um projeto existente com Git, você precisa ir para o diretório do projeto e digitar: git init
+
+git clone:
+Você clona um repositório com git clone [url]. Por exemplo, caso você queria clonar a biblioteca Git do Ruby chamada Grit, você pode fazê-lo da seguinte forma:
+git clone git://github.com/schacon/grit.git
+
+git add:
+Para passar a monitorar um novo arquivo, use o comando git add. Para monitorar o arquivo README, você pode rodar isso:
+git add README
+
+git status:
+A principal ferramenta utilizada para determinar quais arquivos estão em quais estados é o comando:
+git status
+
+git commit:
+Armazena o conteúdo atual do índice em um novo commit, juntamente com uma mensagem de registro do usuário que descreve as mudanças.
+Se usa o commit depois de já ter feito o git add, para fazer o commit:
+git commit -m "Mensagem"
+Para commitar também os arquivos versionados mesmo não estando no Stage basta adicionar o parâmetro -a
+git commit -a -m "Mensagem"
+Refazendo commit quando esquecer de adicionar um arquivo no Stage:
+git commit -m "Mensagem" --amend
+O amend é destrutivo e só deve ser utilizado antes do commit ter sido enviado ao servidor remoto.
+
+git reset:
+Desfazendo Coisas
+Em qualquer fase, você pode querer desfazer alguma coisa. Aqui, veremos algumas ferramentas básicas para desfazer modificações que você fez. Cuidado, porque você não pode desfazer algumas dessas mudanças. Essa é uma das poucas áreas no Git onde você pode perder algum trabalho se fizer errado.
+Para voltar ao último commit:
+git reset --hard HEAD~1
+Para voltar ao último commit e mantém os últimos arquivos no Stage:
+git reset --soft HEAD~1
+Volta para o commit com a hash XXXXXXXXXXX:
+git reset --hard XXXXXXXXXXX
+Recuperando commit apagado pelo git reset
+Para visualizar os hashs
+git reflog
+E para aplicar:
+git merge {hash}
+
+git rm:
+Removendo Arquivos
+Para remover um arquivo do Git, você tem que removê-lo dos arquivos que estão sendo monitorados (mais precisamente, removê-lo da sua área de seleção) e então fazer o commit. O comando git rm faz isso e também remove o arquivo do seu diretório para você não ver ele como arquivo não monitorado (untracked file) na próxima vez.
+git rm -f {arquivo}
+
+git mv:
+Movendo Arquivos
+Diferente de muitos sistemas VCS, o Git não monitora explicitamente arquivos movidos.
+É um pouco confuso que o Git tenha um comando mv. Se você quiser renomear um arquivo no Git, você pode fazer isso com
+git mv arquivo_origem arquivo_destino
+
+git pull:
+Atualizando local
+Incorpora as alterações de um repositório remoto no branch atual. Em seu modo padrão, git pull é uma abreviação para git fetch seguido de git merge FETCH_HEAD. Por exemplo, se eu estiver em uma branch chamada develop e quiser atualizar caso haja atualizações remotamente:
+git pull origin develop
+
+git push:
+Empurrando seus commits
+O git push é o comando em que você transfere commits a partir do seu repositório local para um repositório remoto. É a contrapartida do git fetch, que busca importações e comprometem as agências locais, utilizando o git push as exportações comprometem as filiais remotas. Para fazer isso, você executa git push [nome_do_repositório_remoto] [nome_da_sua_branch_local], que vai tentar fazer que o [nome_do_repositório_remoto] receba a sua branch [nome_da_sua_branch_local] contendo todos seus commits com alterações. Por exemplo:
+git push origin develop
+
